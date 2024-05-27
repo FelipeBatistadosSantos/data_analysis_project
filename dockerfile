@@ -1,23 +1,23 @@
-# Use uma imagem base oficial do Python
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
-# Defina o diretório de trabalho no contêiner
-WORKDIR /app
+# Set the working directory in the container to /usr/src/app
+WORKDIR /usr/src/app
 
-# Copie os arquivos requirements.txt e setup.py para o diretório de trabalho
-COPY requirements.txt setup.py /app/
+# Copy the requirements file to the working directory
+COPY requirements.txt ./
 
-# Instale as dependências
+# Install any dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie o restante do código da aplicação
-COPY . /app/
+# Copy the entire current directory contents into the container at /usr/src/app
+COPY . .
 
-# Instale o pacote usando setup.py
+# Install the package in editable mode
 RUN pip install --no-cache-dir -e .
 
-# Exponha a porta que o Flask usará (caso esteja usando Flask)
+# Expose the port the app runs on
 EXPOSE 5000
 
-# Comando padrão para rodar a aplicação
+# Define the command to run the application
 CMD ["python", "src/main.py"]
