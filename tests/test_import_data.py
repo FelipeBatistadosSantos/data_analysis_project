@@ -1,10 +1,13 @@
 import unittest
+import sys
 import os
 import tempfile
 from flask import Flask
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 from main import app
 from data.import_data import import_csv, check_csv
-
 
 class DataImportTestCase(unittest.TestCase):
     def setUp(self):
