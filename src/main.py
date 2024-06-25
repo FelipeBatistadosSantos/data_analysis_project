@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import os
 import pandas as pd
 from data.import_data import import_csv, check_csv
+from data.clean_data import clean_data
 
 app = Flask(__name__, template_folder='../templates')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../uploads')
@@ -31,6 +32,8 @@ def upload_files():
         
         df = import_csv(file_path)
         if isinstance(df, pd.DataFrame):
+            # Limpar os dados
+            df = clean_data(df)
             print("Retornando DataFrame como HTML")
             return df.to_html()
         else:
