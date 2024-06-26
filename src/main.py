@@ -32,7 +32,10 @@ def upload_files():
         
         df = import_csv(file_path)
         if isinstance(df, pd.DataFrame):
-            # Limpar os dados
+            # Exibe os nomes das colunas para referência
+            print(f"Colunas do DataFrame: {df.columns.tolist()}")
+            
+            # Limpar os dados (substitua 'some_column' pelos nomes reais das colunas)
             df = clean_data(df)
             print("Retornando DataFrame como HTML")
             return df.to_html()
