@@ -1,6 +1,7 @@
 import os
 import pytest
 from flask import Flask
+import pandas as pd
 
 # Adiciona o diretório src ao PYTHONPATH
 import sys
@@ -39,12 +40,18 @@ def test_upload_and_clean_csv(client):
 def test_import_csv():
     # Testa a importação do CSV
     df = import_csv('tests/test_data.csv')
-    assert not df.empty
-    assert 'some_column' in df.columns  # Substitua 'some_column' pelo nome real da coluna
+    if isinstance(df, pd.DataFrame):
+        assert not df.empty
+        assert 'coluna1' in df.columns  # Substitua 'coluna1' pelo nome real da coluna
+    else:
+        pytest.fail(f"Falha ao importar CSV: {df}")
 
 def test_clean_data():
     # Testa a limpeza dos dados
     df = import_csv('tests/test_data.csv')
-    df_cleaned = clean_data(df)
-    assert not df_cleaned.empty
-    # Adicione mais assertivas baseadas na limpeza que você espera
+    if isinstance(df, pd.DataFrame):
+        df_cleaned = clean_data(df)
+        assert not df_cleaned.empty
+        # Adicione mais assertivas baseadas na limpeza que você espera
+    else:
+        pytest.fail(f"Falha ao importar CSV: {df}")
