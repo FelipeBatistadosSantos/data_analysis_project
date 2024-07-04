@@ -1,7 +1,7 @@
 import os
 import pytest
-from flask import Flask
 import pandas as pd
+from flask import Flask
 
 # Adiciona o diretório src ao PYTHONPATH
 import sys
@@ -42,7 +42,9 @@ def test_import_csv():
     df = import_csv('tests/test_data.csv')
     if isinstance(df, pd.DataFrame):
         assert not df.empty
-        assert 'coluna1' in df.columns  # Substitua 'coluna1' pelo nome real da coluna
+        assert 'coluna1' in df.columns  # Verifica se a coluna 'coluna1' está presente
+        assert 'coluna2' in df.columns  # Verifica se a coluna 'coluna2' está presente
+        assert 'coluna3' in df.columns  # Verifica se a coluna 'coluna3' está presente
     else:
         pytest.fail(f"Falha ao importar CSV: {df}")
 
