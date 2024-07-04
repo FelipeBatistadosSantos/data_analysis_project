@@ -1,7 +1,7 @@
 import os
 import pytest
 from flask import Flask
-from src.main import app, import_csv, clean_data
+from main import app, import_csv, clean_data
 
 @pytest.fixture
 def client():
