@@ -1,6 +1,11 @@
 import os
 import pytest
 from flask import Flask
+
+# Adiciona o diretório src ao PYTHONPATH
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 from main import app, import_csv, clean_data
 
 @pytest.fixture
