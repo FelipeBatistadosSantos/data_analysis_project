@@ -1,19 +1,18 @@
-import pandas as pd
 import os
+import pandas as pd
 
-def export_data(df, file_name, output_dir='../exports'):
+def save_cleaned_data(data_frame, upload_folder, filename='cleaned_data.csv'):
     """
-    Exporta o DataFrame para um arquivo CSV.
+    Salva o DataFrame limpo como um arquivo CSV.
 
     Args:
-        df (pd.DataFrame): DataFrame a ser exportado.
-        file_name (str): Nome do arquivo CSV de saída.
-        output_dir (str): Diretório onde o arquivo CSV será salvo.
+    data_frame (pd.DataFrame): O DataFrame que será salvo.
+    upload_folder (str): O diretório onde o arquivo será salvo.
+    filename (str): O nome do arquivo a ser salvo.
 
     Returns:
-        str: Caminho completo do arquivo CSV exportado.
+    str: O caminho completo do arquivo salvo.
     """
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, file_name)
-    df.to_csv(output_path, index=False)
-    return output_path
+    cleaned_file_path = os.path.join(upload_folder, filename)
+    data_frame.to_csv(cleaned_file_path, index=False)
+    return cleaned_file_path
