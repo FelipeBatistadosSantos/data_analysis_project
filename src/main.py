@@ -1,6 +1,6 @@
-import os
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
+import os
 import pandas as pd
 from data.import_data import import_csv, check_csv
 from data.clean_data import clean_data
